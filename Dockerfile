@@ -22,7 +22,7 @@ RUN echo "export LANG=ja_JP.UTF-8" >> /home/dev-admin/.bashrc
 # Install dev tools
 RUN yum install -y gcc gcc-c++ make openssl-devel ncurses-devel zsh tmux git
 RUN yum install -y epel-release
-RUN yum install -y wget tar bzip2 incron nodejs npm
+RUN yum install -y wget tar bzip2 incron
 RUN yum clean all
 RUN chsh dev-admin -s /bin/zsh
 
