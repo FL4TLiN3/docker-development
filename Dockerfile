@@ -8,6 +8,10 @@ RUN ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 # Locale
 RUN localedef -f UTF-8 -i ja_JP ja_JP.UTF-8
 
+# Cleanup
+RUN yum update -y && yum clean all
+RUN yum reinstall -y glibc-common
+
 # User
 RUN useradd dev-admin
 RUN yum -y install sudo
@@ -16,7 +20,10 @@ RUN echo 'dev-admin:dev-admin' | chpasswd
 RUN echo "export LANG=ja_JP.UTF-8" >> /home/dev-admin/.bashrc
 
 # Install dev tools
-RUN yum install -y gcc gcc-c++ zsh tmux git
+RUN yum install -y gcc gcc-c++ make openssl-devel ncurses-devel zsh tmux git
+RUN yum install -y epel-release
+RUN yum install -y wget tar bzip2 incron nodejs npm
+RUN yum clean all
 RUN chsh dev-admin -s /bin/zsh
 
 # Secret Keys
