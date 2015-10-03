@@ -6,7 +6,9 @@ RUN rm /etc/localtime
 RUN ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 # Locale
-RUN localedef -f UTF-8 -i ja_JP ja_JP.UTF-8
+ENV LANG ja_JP.UTF-8
+ENV LANGUAGE ja_JP:ja
+ENV LC_ALL ja_JP.UTF-8
 
 # Cleanup
 RUN yum update -y && yum clean all
